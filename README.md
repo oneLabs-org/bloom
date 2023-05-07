@@ -1,4 +1,4 @@
-# Bloom 
+# Bloom 🌺 : A Self-Hosted CFP portal for Events. 
 Bloom - A project inspired by the natural process of flowers blooming and represents growth, development, and new opportunities.
 
 <p align="center">
