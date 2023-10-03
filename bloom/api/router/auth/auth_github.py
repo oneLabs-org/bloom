@@ -26,7 +26,6 @@ async def github_code(code: str, settings: Annotated[Config, Depends(get_setting
         response = await client.post(url="https://github.com/login/oauth/access_token", params=params, headers=headers)
 
     response_json = response.json()
-    print(response_json)
     access_token = response_json['access_token']
 
     async with httpx.AsyncClient() as client:
