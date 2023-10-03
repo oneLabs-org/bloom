@@ -3,7 +3,8 @@ from functools import lru_cache
 
 
 class Config(BaseSettings):
-    TEST: str
+    GITHUB_CLIENT_ID: str
+    GITHUB_CLIENT_SECRET: str
 
     model_config = SettingsConfigDict(env_file=".env")
 
