@@ -10,18 +10,18 @@ jobs:
     environment:
       name: testing
     env:
-      DATABASE_HOSTNAME: ${{ secrets.DATABASE_HOSTNAME }}
-      DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
-      DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-      DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-      DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
+      DATABASE_HOSTNAME: $${{ secrets.DATABASE_HOSTNAME }}
+      DATABASE_PORT: $${{ secrets.DATABASE_PORT }}
+      DATABASE_PASSWORD: $${{ secrets.DATABASE_PASSWORD }}
+      DATABASE_NAME: $${{ secrets.DATABASE_NAME }}
+      DATABASE_USERNAME: $${{ secrets.DATABASE_USERNAME }}
          
     services:
       postgres:
         image: postgres
         env:
-          POSTGRES_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-          POSTGRES_DB: ${{ secrets.DATABASE_NAME }}
+          POSTGRES_PASSWORD: $${{ secrets.DATABASE_PASSWORD }}
+          POSTGRES_DB: $${{ secrets.DATABASE_NAME }}
         ports:
           - 5432:5432
         options: >-
@@ -50,8 +50,8 @@ jobs:
       - name: Login to Docker Hub
         uses: docker/login-action@v1
         with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+          username: $${{ secrets.DOCKER_HUB_USERNAME }}
+          password: $${{ secrets.DOCKER_HUB_PASSWORD }}
 
       - name: Build and Push Docker image
         uses: docker/build-push-action@v2
@@ -59,7 +59,7 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/bloom-backend:latest
+          tags: $${{ secrets.DOCKER_HUB_USERNAME }}/bloom-backend:latest
     
            
 

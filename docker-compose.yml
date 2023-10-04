@@ -1,0 +1,31 @@
+version: '3'
+services:
+  backend:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - IMAGE_TAG=$${{ secrets.DOCKER_HUB_USERNAME }}/bloom-backend
+    depends_on:
+      - postgres
+    container_name: bloom-backend
+    ports:
+      - "8000:8000"
+    environment: 
+      - DATABASE_URL=postgresql://$${{ secrets.DATABASE_USERNAME }}:$${{ secrets.DATABASE_PASSWORD }}@postgres:5432/$${{ secrets.DATABASE_NAME }}
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: $${{ secrets.DATABASE_USERNAME }}
+      POSTGRES_PASSWORD: $${{ secrets.DATABASE_PASSWORD }}
+      POSTGRES_DB: $${{ secrets.POSTGRES_DB }}
+    ports:
+      - "5432:5432"
+    volumes:
+      - bloom_data:/var/lib/postgresql/data
+
+volumes:
+   bloom_data: 
+     
+    
