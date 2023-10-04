@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, Any
 from pydantic import BaseModel
 
 
@@ -12,20 +12,20 @@ class LogConfig(BaseModel):
     # Logging config
     version: int = 1
     disable_existing_loggers: bool = False
-    formatters: Dict[str, dict] = {
+    formatters: Dict[str, Dict[str, str]] = {
         "default": {
             "()": "uvicorn.logging.DefaultFormatter",
             "fmt": LOG_FORMAT,
             "datefmt": "%Y-%m-%d %H:%M:%S",
         },
     }
-    handlers: Dict[str, dict] = {
+    handlers: Dict[str, Dict[str, Any]] = {
         "default": {
             "formatter": "default",
             "class": "logging.StreamHandler",
             "stream": "ext://sys.stderr",
         },
     }
-    loggers: Dict[str, dict] = {
+    loggers: Dict[str, Dict[str, Any]] = {
         LOGGER_NAME: {"handlers": ["default"], "level": LOG_LEVEL},
     }
