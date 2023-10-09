@@ -19,8 +19,8 @@ services:
     depends_on:
       - postgres
     container_name: bloom-backend
-    expose:
-      - "8000" 
+    ports:
+      - "8000:8000" 
     env_file:
       - .env
 
