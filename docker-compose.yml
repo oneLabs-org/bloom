@@ -1,9 +1,21 @@
 version: '3'
 services:
+
+  frontend:
+    image: blossomlabsio/bloom-frontend
+    env_file:
+      - .env  
+    depends_on:
+      - postgres
+      - backend
+    container_name: bloom-frontend
+    ports: 
+      - "80:80"
+        
+
   backend:
-    build: 
-      context: .
-      dockerfile: Dockerfile
+    image: blossomlabsio/bloom-backend
+
     depends_on:
       - postgres
     container_name: bloom-backend
@@ -16,7 +28,7 @@ services:
     image: postgres:latest
     env_file:
       - .env
-    ports:
+    expose:
       - "5432:5432"
     volumes:
       - bloom_data:/var/lib/postgresql/data
