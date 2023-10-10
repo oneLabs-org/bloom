@@ -1,0 +1,6 @@
+[tool.ruff]
+line-length = 160
+exclude = ["src/*", ".git", "docs"]
+
+[tool.ruff.mccabe]
+max-complexity = 10
