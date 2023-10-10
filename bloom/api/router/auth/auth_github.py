@@ -8,7 +8,10 @@ import httpx
 
 @router.get("/github-login")
 async def github_auth(settings: Annotated[Config, Depends(get_settings)]):
-    return RedirectResponse(f"https://github.com/login/oauth/authorize?client_id={settings.GITHUB_CLIENT_ID}", status_code=status.HTTP_302_FOUND)
+    return RedirectResponse(
+        f"https://github.com/login/oauth/authorize?client_id={settings.GITHUB_CLIENT_ID}",
+        status_code=status.HTTP_302_FOUND,
+    )
 
 
 @router.get("/github-code")
@@ -16,17 +19,19 @@ async def github_code(code: str, settings: Annotated[Config, Depends(get_setting
     params: Dict[str, str] = {
         "client_id": settings.GITHUB_CLIENT_ID,
         "client_secret": settings.GITHUB_CLIENT_SECRET,
-        "code": code
+        "code": code,
     }
 
-    headers: Dict[str, str] = {
-        "Accept": "application/json"
-    }
+    headers: Dict[str, str] = {"Accept": "application/json"}
     async with httpx.AsyncClient() as client:
-        response = await client.post(url="https://github.com/login/oauth/access_token", params=params, headers=headers)
+        response = await client.post(
+            url="https://github.com/login/oauth/access_token",
+            params=params,
+            headers=headers,
+        )
 
     response_json = response.json()
-    access_token = response_json['access_token']
+    access_token = response_json["access_token"]
 
     async with httpx.AsyncClient() as client:
         headers.update({"Authorization": f"Bearer {access_token}"})

@@ -6,9 +6,7 @@ from sqlalchemy.orm import sessionmaker
 from ...core.settings import config
 
 engine = create_engine(
-    config.get_settings().SQLALCHEMY_DATABASE_URI,
-    connect_args={},
-    future=True
+    config.get_settings().SQLALCHEMY_DATABASE_URI, connect_args={}, future=True
 )
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
