@@ -10,7 +10,6 @@ class UserModel(Base):
     last_name = Column(String(100))
     email = Column(String(255), unique=True, index=True)
     password = Column(String(100))
-    is_active = Column(Boolean, default=False)
     is_verified = Column(Boolean, default=False)
     verified_at = Column(DateTime, nullable=True, default=None)
     registered_at = Column(DateTime, nullable=True, default=None)
