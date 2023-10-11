@@ -55,13 +55,6 @@ async def get_refresh_token(token, db):
 
 
 def _verify_user_access(user: UserModel):
-    if not user.is_active:
-        raise HTTPException(
-            status_code=400,
-            detail="Your account is inactive. Please contact support.",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
-
     if not user.is_verified:
         # Trigger user account verification email
         raise HTTPException(
