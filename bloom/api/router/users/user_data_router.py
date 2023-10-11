@@ -11,5 +11,5 @@ router = APIRouter(
 
 
 @router.get("/me", status_code=status.HTTP_200_OK, response_model=UserResponse)
-def get_user_deatils(request: Request):
+def get_user_details(request: Request):
     return request.user
