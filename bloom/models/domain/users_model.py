@@ -1,16 +1,18 @@
-from sqlalchemy import Column, BIGINT, VARCHAR
+from sqlalchemy import Boolean, Column, Integer, String, DateTime, func
+from datetime import datetime
 from ...db.repositories.database_setup import Base
 
 
-class Test(Base):
-    __tablename__ = "tests"
-    test_id = Column(BIGINT, primary_key=True)
-    test_name = Column(VARCHAR(40), nullable=False)
-    test_email = Column(VARCHAR(30), nullable=False)
-
-
-class Test2(Base):
-    __tablename__ = "nontests"
-    test_id_one = Column(BIGINT, primary_key=True)
-    test_name_one = Column(VARCHAR(40), nullable=False)
-    test_email_one = Column(VARCHAR(30), nullable=False)
+class UserModel(Base):
+    __tablename__ = "users"
+    id = Column(Integer, primary_key=True, index=True)
+    first_name = Column(String(100))
+    last_name = Column(String(100))
+    email = Column(String(255), unique=True, index=True)
+    password = Column(String(100))
+    is_active = Column(Boolean, default=False)
+    is_verified = Column(Boolean, default=False)
+    verified_at = Column(DateTime, nullable=True, default=None)
+    registered_at = Column(DateTime, nullable=True, default=None)
+    updated_at = Column(DateTime, nullable=True, default=None, onupdate=datetime.now)
+    created_at = Column(DateTime, nullable=False, server_default=func.now())
