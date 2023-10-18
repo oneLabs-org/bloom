@@ -1,12 +1,11 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
-
 from sqlalchemy.orm import sessionmaker
 
-from ...core.settings import config
+from bloom.config import get_settings
 
 engine = create_engine(
-    config.get_settings().SQLALCHEMY_DATABASE_URI, connect_args={}, future=True
+    get_settings().SQLALCHEMY_DATABASE_URI, connect_args={}, future=True
 )
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

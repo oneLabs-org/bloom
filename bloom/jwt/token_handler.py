@@ -1,15 +1,15 @@
 from fastapi.exceptions import HTTPException
 from datetime import timedelta
 
-from ...core.settings.config import get_settings
-from ...models.domain.users_model import UserModel
-from ...services.security.hash_password import (
+from ..config import get_settings
+from ..models.user import UserModel
+from ..security import (
     verify_password_hash,
     create_access_token,
     create_refresh_token,
     get_token_payload,
 )
-from ...models.schemas.token_response_schema import TokenResponseSchema
+from .schemas import TokenResponseSchema
 
 
 async def get_token(data, db):
@@ -67,7 +67,8 @@ def _verify_user_access(user: UserModel):
 async def _get_user_token(user: UserModel, refresh_token=None):
     payload = {"id": user.id}
 
-    access_token_expiry = timedelta(minutes=get_settings().ACCESS_TOKEN_EXPIRY_MINUTES)
+    access_token_expiry = timedelta(
+        minutes=get_settings().ACCESS_TOKEN_EXPIRY_MINUTES)
 
     access_token = await create_access_token(
         request=payload, expiry_time=access_token_expiry

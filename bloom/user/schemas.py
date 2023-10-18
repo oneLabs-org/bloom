@@ -14,4 +14,5 @@ class UserResponse(BaseModel):
     first_name: str
     last_name: str
     email: EmailStr
+    role: str
     registered_at: Union[None, datetime] = None

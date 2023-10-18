@@ -2,7 +2,7 @@ from typing import Dict, Any
 from pydantic import BaseModel
 
 
-class LogConfig(BaseModel):
+class Logger(BaseModel):
     """Logging configuration to be set for the server"""
 
     LOGGER_NAME: str = "Bloom"

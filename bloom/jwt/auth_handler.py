@@ -1,9 +1,8 @@
 from starlette.authentication import AuthCredentials, UnauthenticatedUser
 from fastapi import Depends
-from ..security.hash_password import oauth2_scheme
-from ...models.domain.users_model import UserModel
-from ...db.repositories.database_setup import get_db
-from ..security.hash_password import get_token_payload
+from ..security import oauth2_scheme, get_token_payload
+from ..models.user import UserModel
+from ..postgres import get_db
 
 
 def get_current_user(token: str = Depends(oauth2_scheme), db=None):
@@ -29,7 +28,8 @@ class JWTAuth:
         if "Authorization" not in conn.headers:
             return guest
 
-        token = conn.headers.get("Authorization").split(" ")[1]  # Bearer token_hash
+        token = conn.headers.get("Authorization").split(" ")[
+            1]  # Bearer token_hash
         if not token:
             return guest
 
