@@ -5,8 +5,8 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from bloom.db.repositories.database_setup import Base
-from bloom.models.domain import users_model
+from bloom.postgres import Base
+from bloom.models import user
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
