@@ -1,7 +1,7 @@
 from sqlalchemy import Boolean, Column, Integer, String, DateTime, func, Enum
 from datetime import datetime
 from enum import StrEnum
-from ..postgres import Base
+from bloom.postgres import Base
 
 
 class UserRole(StrEnum):

@@ -1,8 +1,8 @@
 from fastapi import APIRouter
 
-from .auth.endpoints import router as auth_router
-from .user.endpoints import router as user_router
-from .health.endpoints import router as health_router
+from bloom.auth.endpoints import router as auth_router
+from bloom.user.endpoints import router as user_router
+from bloom.health.endpoints import router as health_router
 
 router = APIRouter(prefix="/api/v1")
 

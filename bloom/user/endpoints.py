@@ -1,6 +1,6 @@
 from fastapi import APIRouter, status, Depends, Request
-from ..security import oauth2_scheme
-from .schemas import UserResponse
+from bloom.security import oauth2_scheme
+from bloom.user.schemas import UserResponse
 
 router = APIRouter(
     prefix="/info/user",

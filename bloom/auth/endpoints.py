@@ -2,12 +2,12 @@ from fastapi import APIRouter, Depends, status, Header, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
 from datetime import datetime
 from sqlalchemy.orm import Session
-from ..jwt.schemas import TokenResponseSchema
-from ..postgres import get_db
-from .schemas import CreateUserRequest
-from ..security import get_password_hash
-from ..jwt.token_handler import get_token, get_refresh_token
-from ..models.user import UserModel
+from bloom.jwt.schemas import TokenResponseSchema
+from bloom.postgres import get_db
+from bloom.auth.schemas import CreateUserRequest
+from bloom.security import get_password_hash
+from bloom.jwt.token_handler import get_token, get_refresh_token
+from bloom.models.user import UserModel
 
 router = APIRouter(
     tags=["auth"], prefix="/auth", responses={404: {"description": "Not Found"}}
