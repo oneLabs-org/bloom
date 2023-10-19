@@ -36,7 +36,7 @@ migrate = "alembic upgrade head"
 
 [tool.ruff]
 line-length = 160
-exclude = ["src/*", ".git", "docs"]
+exclude = ["src/*", ".git", "docs", "migrations/*", "bloom/models/*"]
 
 [tool.ruff.mccabe]
 max-complexity = 10
