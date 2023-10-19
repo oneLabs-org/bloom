@@ -56,7 +56,7 @@ cd Bloom-Backend
 pdm install
 
 # Run Migrations
-pdm run makemigrations "init"
+pdm run makemigrations -m "init"
 
 # Make Migrations
 pdm run migrate
@@ -104,7 +104,7 @@ If you still need help to get started, feel free to reach out on our [community 
 You can then request the server you ran from an other terminal. Here is a `GET` request done using [curl](https://curl.se/) for example:
 
 ```bash
-curl http://127.0.0.1:8000/api/v1/healtz
+curl http://127.0.0.1:8000/api/v1/healthz
 ```
 
 or

@@ -30,7 +30,7 @@ lint = [
 start = "uvicorn bloom.app:app"
 dev = "uvicorn bloom.app:app --reload"
 format = "black bloom"
-makemigrations = "alembic revision --autogenerate -m"
+makemigrations = "alembic revision --autogenerate"
 migrate = "alembic upgrade head"
 
 
