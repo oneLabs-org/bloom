@@ -67,8 +67,7 @@ def _verify_user_access(user: UserModel):
 async def _get_user_token(user: UserModel, refresh_token=None):
     payload = {"id": user.id}
 
-    access_token_expiry = timedelta(
-        minutes=get_settings().ACCESS_TOKEN_EXPIRY_MINUTES)
+    access_token_expiry = timedelta(minutes=get_settings().ACCESS_TOKEN_EXPIRY_MINUTES)
 
     access_token = await create_access_token(
         request=payload, expiry_time=access_token_expiry
