@@ -7,3 +7,9 @@ repos:
     rev: v0.5.2
     hooks:
       - id: remove-print-statements
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: v2.4.0
+    hooks:
+      - id: conventional-pre-commit
+        stages: [commit-msg]
+        args: []
