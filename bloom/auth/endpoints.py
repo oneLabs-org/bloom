@@ -9,8 +9,9 @@ from ..security import get_password_hash
 from ..jwt.token_handler import get_token, get_refresh_token
 from ..models.user import UserModel
 
-router = APIRouter(tags=["auth"], prefix="/auth",
-                   responses={404: {"description": "Not Found"}})
+router = APIRouter(
+    tags=["auth"], prefix="/auth", responses={404: {"description": "Not Found"}}
+)
 
 
 @router.post("/register", status_code=status.HTTP_201_CREATED)

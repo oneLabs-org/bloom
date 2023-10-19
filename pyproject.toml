@@ -1,0 +1,42 @@
+[project]
+authors = [
+    {name = "Kanishk Pachauri", email = "itskanishkp.py@gmail.com"},
+]
+dependencies = [
+    "fastapi[all]>=0.104.0",
+    "SQLAlchemy>=2.0.22",
+    "python-jose>=3.3.0",
+    "passlib>=1.7.4",
+    "psycopg2-binary>=2.9.9",
+    "alembic>=1.12.0",
+    "pydantic-settings>=2.0.3",
+    "python-dotenv>=1.0.0",
+]
+requires-python = ">=3.9"
+readme = "README.md"
+license = {text = "MIT"}
+[tool.pdm.dev-dependencies]
+test = [
+    "pytest>=7.4.2",
+]
+lint = [
+    "black>=23.10.0",
+    "ruff>=0.1.0",
+    "pre-commit>=3.5.0",
+]
+
+
+[tool.pdm.scripts]
+start = "uvicorn bloom.app:app"
+dev = "uvicorn bloom.app:app --reload"
+format = "black bloom"
+makemigrations = "alembic revision --autogenerate -m"
+migrate = "alembic upgrade head"
+
+
+[tool.ruff]
+line-length = 160
+exclude = ["src/*", ".git", "docs"]
+
+[tool.ruff.mccabe]
+max-complexity = 10

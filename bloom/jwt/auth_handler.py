@@ -28,8 +28,7 @@ class JWTAuth:
         if "Authorization" not in conn.headers:
             return guest
 
-        token = conn.headers.get("Authorization").split(" ")[
-            1]  # Bearer token_hash
+        token = conn.headers.get("Authorization").split(" ")[1]  # Bearer token_hash
         if not token:
             return guest
 
