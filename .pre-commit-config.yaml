@@ -3,6 +3,10 @@ repos:
     rev: 23.3.0
     hooks:
       - id: black
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.0.292
+    hooks:
+      - id: ruff
   - repo: https://github.com/dhruvmanila/remove-print-statements
     rev: v0.5.2
     hooks:
