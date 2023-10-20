@@ -1,8 +1,8 @@
 from starlette.authentication import AuthCredentials, UnauthenticatedUser
 from fastapi import Depends
-from ..security import oauth2_scheme, get_token_payload
-from ..models.user import UserModel
-from ..postgres import get_db
+from bloom.security import oauth2_scheme, get_token_payload
+from bloom.models.user import UserModel
+from bloom.postgres import get_db
 
 
 def get_current_user(token: str = Depends(oauth2_scheme), db=None):

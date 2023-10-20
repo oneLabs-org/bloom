@@ -1,11 +1,17 @@
 from fastapi import FastAPI, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.authentication import AuthenticationMiddleware
-from .jwt.auth_handler import JWTAuth
-from .api import router
-from logging import Logger
+import logging
+from logging.config import dictConfig
+from bloom.logging import LogConfig
 
-logger = Logger(name="Bloom Logger")
+from bloom.jwt.auth_handler import JWTAuth
+from bloom.api import router
+
+dictConfig(LogConfig())
+logger = logging.getLogger("bloom")
+
+
 origins = ["*"]
 
 

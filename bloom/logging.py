@@ -2,10 +2,10 @@ from typing import Dict, Any
 from pydantic import BaseModel
 
 
-class Logger(BaseModel):
+class LogConfig(BaseModel):
     """Logging configuration to be set for the server"""
 
-    LOGGER_NAME: str = "Bloom"
+    LOGGER_NAME: str = "bloom"
     LOG_FORMAT: str = "%(levelprefix)s | %(asctime)s | %(message)s"
     LOG_LEVEL: str = "DEBUG"
 

@@ -1,15 +1,15 @@
 from fastapi.exceptions import HTTPException
 from datetime import timedelta
 
-from ..config import get_settings
-from ..models.user import UserModel
-from ..security import (
+from bloom.config import get_settings
+from bloom.models.user import UserModel
+from bloom.security import (
     verify_password_hash,
     create_access_token,
     create_refresh_token,
     get_token_payload,
 )
-from .schemas import TokenResponseSchema
+from bloom.jwt.schemas import TokenResponseSchema
 
 
 async def get_token(data, db):

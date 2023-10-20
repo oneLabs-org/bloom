@@ -30,13 +30,13 @@ lint = [
 start = "uvicorn bloom.app:app"
 dev = "uvicorn bloom.app:app --reload"
 format = "black bloom"
-makemigrations = "alembic revision --autogenerate -m"
+makemigrations = "alembic revision --autogenerate"
 migrate = "alembic upgrade head"
 
 
 [tool.ruff]
 line-length = 160
-exclude = ["src/*", ".git", "docs"]
+exclude = ["src/*", ".git", "docs", "migrations/*", "bloom/models/*"]
 
 [tool.ruff.mccabe]
 max-complexity = 10
