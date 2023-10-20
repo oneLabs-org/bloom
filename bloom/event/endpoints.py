@@ -5,6 +5,7 @@ from bloom.security import oauth2_scheme
 from bloom.event.schemas import CreateEventRequest, EventResponse
 from bloom.models.user import UserModel
 from bloom.models.event import EventModel
+from bloom.event.services import EventFormatter
 
 
 router = APIRouter(
@@ -17,7 +18,9 @@ router = APIRouter(
 
 @router.post("/new", status_code=status.HTTP_201_CREATED)
 async def create_new_event(
-    request_user: Request, request: CreateEventRequest, db: Session = Depends(get_db)
+    request_user: Request,
+    request: CreateEventRequest,
+    db: Session = Depends(get_db),
 ):
     user_role = db.query(UserModel).filter(request_user.user.role == "admin").first()
     if not user_role:
@@ -33,7 +36,7 @@ async def create_new_event(
         )
 
     new_event = EventModel(
-        name=request.event_name,
+        name=EventFormatter.format_event(request.event_name),
         location=request.event_location,
         event_start=request.event_start,
         event_end=request.event_end,
@@ -53,3 +56,20 @@ def get_current_user_events(request_user: Request, db: Session = Depends(get_db)
         db.query(EventModel).filter(EventModel.creator_id == request_user.user.id).all()
     )
     return events_created_by_user
+
+
+@router.get(
+    "/{event_name}", status_code=status.HTTP_200_OK, response_model=EventResponse
+)
+def get_event_info_by_name(event_name: str, db: Session = Depends(get_db)):
+    search_event = (
+        db.query(EventModel)
+        .filter(EventModel.name == EventFormatter.format_event(event_name))
+        .first()
+    )
+    if not search_event:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Not Found",
+        )
+    return search_event
