@@ -18,68 +18,149 @@ A Backend Server Written in 🐍 and FastAPI with 🐘 DB that powers the Self-H
 
 # 🤔 Pre-requisites
 
-`python3.9.x`
-`pdm`
-`postgres`
-
-# 📦 Setup
-
-- <h3> Local setup 🛠️ without Docker 🐳 </h3>
-  <p>
-  We are using <a href="https://pdm.fming.dev/latest/"> PDM </a> to manage depency for the project, so you need to install pdm to use this project.
-  </p>
-  <br>
-
-  - Create a .env file and add these following variables with there respective values in it.
-
-  ```env
-  SQLALCHEMY_DATABASE_URI="YOUR POSTGRES URI"
-  JWT_SECRET="YOUR JWT SECRET"
-  JWT_ALGORITHM="YOUR JWT ALGORITHM"
-  ACCESS_TOKEN_EXPIRY_MINUTES=YOUR ACCESS TOKEN EXPIRE TIME(INT)
-  ```
-
-  - Add POSTGRES 🐘 URI in alembic.ini
-
-  ```ini
-    63. sqlalchemy.url = YOUR_POSTGRES_URI
-  ```
-
-```commandline
-# clone the repository
-git clone https://github.com/blossomlabsio/Bloom-Backend.git
-
-# Change Directory to the Project
-cd Bloom-Backend
-
-# Install Dependency
-pdm install
-
-# Run Migrations
-pdm run makemigrations -m "init"
-
-# Make Migrations
-pdm run migrate
-
-# Run the Project
-pdm run start
-```
+- `python3.11.0rc2`
+- `pdm`
+- `postgres`
 
 ## 🐍 Python Version Support
 
-This project is compatible with the following Python versions:
+This project is designed to be compatible with specific versions of Python for optimal performance and stability.
 
-> Python >= 3.9
+### Supported Python Version
 
-It is recommended to use the latest version of Python for the best performances.
+- **Python 3.11.0rc2**
 
-Please make sure you have the correct version of Python installed before starting to use
-this project. You can check your Python version by running the following command in your
-terminal:
+> ❗️ For the best experience and performance, it is recommended to use the version mentioned above.
+
+Before diving into the project, ensure that you have the correct Python version installed. To check the version of Python you currently have, execute the following command in your terminal:
 
 ```bash
 python --version
 ```
+
+### 🐍 Installing Python 3.11.0rc2 with `pyenv`
+
+**Protip:** Managing multiple Python versions is a breeze with [pyenv](https://github.com/pyenv/pyenv). It allows you to seamlessly switch between different Python versions without the need to reinstall them.
+
+If you haven't installed `pyenv` yet, follow their [official guide](https://github.com/pyenv/pyenv) to set it up.
+
+Once you have `pyenv` ready, install the recommended Python version by running:
+
+```bash
+pyenv install 3.11.0rc2
+```
+
+> When you navigate to this project's directory in the future, `pyenv` will automatically select the recommended Python version, thanks to the `.python-version` file in the project root.
+
+
+# 📦 Setup
+
+## Local setup 🛠️ without Docker 🐳 
+
+### Configuring your `.env` file
+
+1. **Copying the `.env.example` file**:
+   Begin by creating a copy of the `.env.example` file and renaming it to `.env`.
+   ```bash
+   cp .env.example .env
+   ```
+
+2. **Filling in the Parameters**:
+   
+   - **SQLALCHEMY_DATABASE_URI**:
+     This is the connection string for your PostgreSQL database. The format is generally:
+     ```
+     postgresql://[user[:password]@][host][:port][/dbname]
+     ```
+     For example, if you have a local PostgreSQL server with the database `mydb`, username `admin`, and password `password123`, the connection string would be:
+     ```
+     SQLALCHEMY_DATABASE_URI="postgresql://admin:password123@localhost/mydb"
+     ```
+
+   - **JWT_SECRET**:
+     This is a secret key used to encode and decode JWT tokens. It should be a random and long string to ensure the security of your tokens. You can generate one using various online tools or by running the following Python snippet:
+     ```python
+     import secrets
+     print(secrets.token_hex(16))
+     ```
+
+   - **JWT_ALGORITHM**:
+     This specifies the algorithm used to sign the JWT tokens. The most common algorithm is `HS256`, which stands for HMAC using SHA-256. Depending on your requirements, you might use other algorithms, but for most applications, `HS256` is sufficient. So, you can set it as:
+     ```
+     JWT_ALGORITHM="HS256"
+     ```
+
+   - **ACCESS_TOKEN_EXPIRY_MINUTES**:
+     This is an integer that represents the number of minutes before a generated access token expires. For example, if you want the token to expire in 60 minutes (1 hour), you'd set:
+     ```
+     ACCESS_TOKEN_EXPIRY_MINUTES=60
+     ```
+
+
+### Configuring PostgreSQL URI in `alembic.ini`
+
+To set up the PostgreSQL connection for [Alembic](https://alembic.sqlalchemy.org/en/latest/):
+
+* **Locate the Configuration in `alembic.ini`**:
+   * Open the `alembic.ini` file and navigate to approximately line `#63`.
+
+* **Add Your PostgreSQL URI**:
+   Find the following line:
+   ```
+   sqlalchemy.url = ...
+   ```
+   Replace it with your PostgreSQL URI. The format for the URI is generally:
+   ```
+   postgresql://[user[:password]@][host][:port][/dbname]
+   ```
+   For example, if you have a local PostgreSQL server with the database `mydb`, username `admin`, and password `password123`, update the line to:
+   ```
+   sqlalchemy.url = postgresql://admin:password123@localhost/mydb
+   ```
+
+> ❗️ Ensure that the database credentials provided have the necessary permissions for Alembic to perform migrations.
+
+### Setting Up the Project with PDM
+
+[PDM (Python Development Master)](https://pdm.fming.dev/latest/) is utilized for dependency management in this project. To set up and run the project:
+
+1. **Installing PDM**:
+   Before you begin, ensure you have PDM installed. If not, refer to the [official documentation](https://pdm.fming.dev/latest/) to install PDM.
+
+2. **Clone the Repository**:
+   Get the project source code from GitHub:
+   ```bash
+   git clone https://github.com/blossomlabsio/Bloom-Backend.git
+   ```
+
+3. **Navigate to the Project Directory**:
+   ```bash
+   cd Bloom-Backend
+   ```
+
+4. **Install Dependencies**:
+   Use PDM to install the project's dependencies:
+   ```bash
+   pdm install
+   ```
+
+5. **Run Migrations**:
+   Create migrations with the specified message:
+   ```bash
+   pdm run makemigrations -m "init"
+   ```
+
+6. **Apply Migrations**:
+   Apply the created migrations to the database:
+   ```bash
+   pdm run migrate
+   ```
+
+7. **Start the Project**:
+   Use PDM to run the project:
+   ```bash
+   pdm run start
+   ```
 
 ## 🗒️ How to contribute
 
