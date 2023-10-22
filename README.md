@@ -1,6 +1,6 @@
-# Bloom 🌺 : A Self-Hosted CFP portal for Events.
+# Bloom 🌺 : A Self-Hosted CFP portal for Events
 
-<hr>
+---
 A Backend Server Written in 🐍 and FastAPI with 🐘 DB that powers the Self-Hosted CFP Management Service Bloom.
 
 [![pdm-managed](https://img.shields.io/badge/pdm-managed-blueviolet)](https://pdm.fming.dev)
@@ -9,16 +9,15 @@ A Backend Server Written in 🐍 and FastAPI with 🐘 DB that powers the Self-H
 [![GitHub stars](https://img.shields.io/github/stars/blossomlabsio/Bloom-Backend)](https://github.com/blossomlabsio/Bloom-Backend/stargazers)
 [![GitHub license](https://img.shields.io/github/license/blossomlabsio/Bloom-Backend)](https://github.com/blossomlabsio/Bloom-Backend/blob/main/LICENSE)
 [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) ![contributions welcome](https://img.shields.io/static/v1.svg?label=Contributions&message=Welcome&color=0059b3&style=flat-square) ![GitHub contributors](https://img.shields.io/github/contributors-anon/blossomlabsio/Bloom-Backend)
-<br>
+---
 
-<hr>
 <p align="center">
     <img width="320" height="320" src="artwork/4388667.png" alt="Material Bread logo">
 </p>
 
 # 🤔 Pre-requisites
 
-- `python3.11.0rc2`
+- `python3`
 - `pdm`
 - `postgres`
 
@@ -124,84 +123,100 @@ To set up the PostgreSQL connection for [Alembic](https://alembic.sqlalchemy.org
 
 [PDM (Python Development Master)](https://pdm.fming.dev/latest/) is utilized for dependency management in this project. To set up and run the project:
 
-1. **Installing PDM**:
+* **Installing PDM**:
    Before you begin, ensure you have PDM installed. If not, refer to the [official documentation](https://pdm.fming.dev/latest/) to install PDM.
 
-2. **Clone the Repository**:
+* **Clone the Repository**:
    Get the project source code from GitHub:
    ```bash
    git clone https://github.com/blossomlabsio/Bloom-Backend.git
    ```
 
-3. **Navigate to the Project Directory**:
+* **Navigate to the Project Directory**:
    ```bash
    cd Bloom-Backend
    ```
 
-4. **Install Dependencies**:
+* **Install Dependencies**:
    Use PDM to install the project's dependencies:
    ```bash
    pdm install
    ```
 
-5. **Run Migrations**:
+* **Run Migrations**:
    Create migrations with the specified message:
    ```bash
    pdm run makemigrations -m "init"
    ```
 
-6. **Apply Migrations**:
+* **Apply Migrations**:
    Apply the created migrations to the database:
    ```bash
    pdm run migrate
    ```
 
-7. **Start the Project**:
+* **Start the Project**:
    Use PDM to run the project:
    ```bash
    pdm run start
    ```
+  * You can also use `pdm run dev` to start the dev server.
 
-## 🗒️ How to contribute
 
-### 🏁 Get started
+## Setting Up and Testing the Project
 
-Please read the [code of conduct](https://github.com/blossomlabsio/Bloom-Backend/blob/main/CODE_OF_CONDUCT.md) and go through [CONTRIBUTING.md](https://github.com/blossomlabsio/Bloom-Backend/blob/main/CONTRIBUTING.md) before contributing to Bloom-Backend.
+To ensure the code quality and functionality of the project, follow the steps below:
 
-Feel free to open an issue for any clarifications or suggestions.
+### Installing Git Hooks with `pre-commit`
 
-If you still need help to get started, feel free to reach out on our [community discord](https://discord.gg/8nzWAXuWN).
+Before making any commits, it's essential to ensure that your code meets the quality standards. This project utilizes `pre-commit` hooks to automatically check your changes before any commit.
 
-### ⚙️ To Develop Locally
+Install the pre-commit hooks with the following command:
 
-1. Install the development dependencies: `pdm install`
+```bash
+pre-commit install
+```
 
-2. Install the pre-commit git hooks: `pre-commit install`
+### Running Tests
 
-3. Run `pdm run start` to start the server or `pdm run dev` to start the dev server.
+To ensure the project's functionality, you should run all the provided tests. Execute the following command to run the tests:
 
-4. Run `pdm run test`. This will run all the tests.
+```bash
+pdm run test
+```
 
-You can then request the server you ran from an other terminal. Here is a `GET` request done using [curl](https://curl.se/) for example:
+### Testing the Running Server
+
+Once you have your server up and running, you can send requests to it from another terminal to test its responsiveness and functionality.
+
+Here are a couple of `GET` requests you can make using [curl](https://curl.se/):
 
 ```bash
 curl http://127.0.0.1:8000/api/v1/healthz
-```
 
-or
-
-```bash
 curl http://127.0.0.1:8000/api/v1/readyz
 ```
 
-## 💪 Thanks to all Wonderful Contributors
+> These endpoints typically return the health status or readiness of the server, helping in diagnostics and monitoring.
+
+
+# 🗒️ How to contribute
+
+> ❗️Important: **Please read the [Code of Conduct](CODE_OF_CONDUCT.md) and go through [Contributing Guideline](CONTRIBUTING.md) before contributing to Bloom-Backend.**
+
+* Feel free to open an issue for any clarifications or suggestions. 
+
+* If you still need help to get started, feel free to reach out on our [community discord](https://discord.gg/8nzWAXuWN).
+
+
+# 💪 Thanks to all Wonderful Contributors
 
 Thanks a lot for spending your time helping Bloom 🌺 grow.
 Thanks a lot! Keep rocking 🍻
 
 [![Contributors](https://contrib.rocks/image?repo=blossomlabsio/Bloom-Backend)](https://github.com/blossomlabsio/Bloom-Backend/graphs/contributors)
 
-## 🙏 Support++
+# 🙏 Support++
 
 This project needs your shiny star ⭐.
 Don't forget to leave a star ⭐️
