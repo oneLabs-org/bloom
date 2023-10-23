@@ -3,6 +3,7 @@
 ---
 A Backend Server Written in 🐍 and FastAPI with 🐘 DB that powers the Self-Hosted CFP Management Service Bloom.
 
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/blossomlabsio/Bloom-Backend/main.svg)](https://results.pre-commit.ci/latest/github/blossomlabsio/Bloom-Backend/main)
 [![pdm-managed](https://img.shields.io/badge/pdm-managed-blueviolet)](https://pdm.fming.dev)
 [![GitHub issues](https://img.shields.io/github/issues/blossomlabsio/Bloom-Backend)](https://github.com/blossomlabsio/Bloom-Backend)
 [![GitHub forks](https://img.shields.io/github/forks/blossomlabsio/Bloom-Backend)](https://github.com/blossomlabsio/Bloom-Backend)
