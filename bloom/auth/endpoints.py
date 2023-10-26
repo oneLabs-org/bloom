@@ -2,7 +2,6 @@ from fastapi import APIRouter, Depends, status, Header, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
 from datetime import datetime
 from sqlalchemy.orm import Session
-from bloom.jwt.schemas import TokenResponseSchema
 from bloom.postgres import get_db
 from bloom.auth.schemas import CreateUserRequest
 from bloom.security import get_password_hash
