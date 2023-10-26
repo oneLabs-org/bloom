@@ -7,7 +7,7 @@ from bloom.postgres import get_db
 
 def get_current_user(token: str = Depends(oauth2_scheme), db=None):
     payload = get_token_payload(token)
-    if not payload or type(payload) is not dict:
+    if not payload or not isinstance(payload, dict):
         return None
 
     user_id = payload.get("id", None)
