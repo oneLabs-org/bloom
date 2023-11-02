@@ -36,7 +36,8 @@ async def create_new_event(
         )
 
     new_event = EventModel(
-        name=EventFormatter.format_event(request.event_name),
+        name=request.event_name,
+        slug=EventFormatter.format_slug(request.event_name),
         location=request.event_location,
         event_start=request.event_start,
         event_end=request.event_end,
@@ -59,14 +60,10 @@ def get_current_user_events(request_user: Request, db: Session = Depends(get_db)
 
 
 @router.get(
-    "/{event_name}", status_code=status.HTTP_200_OK, response_model=EventResponse
+    "/{event_slug}", status_code=status.HTTP_200_OK, response_model=EventResponse
 )
-def get_event_info_by_name(event_name: str, db: Session = Depends(get_db)):
-    search_event = (
-        db.query(EventModel)
-        .filter(EventModel.name == EventFormatter.format_event(event_name))
-        .first()
-    )
+def get_event_info_by_name(event_slug: str, db: Session = Depends(get_db)):
+    search_event = db.query(EventModel).filter(EventModel.slug == event_slug).first()
     if not search_event:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
