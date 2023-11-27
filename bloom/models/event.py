@@ -9,6 +9,7 @@ class EventModel(Base):
     __tablename__ = "events"
     event_id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
+    slug = Column(String, nullable=False)
     location = Column(String, nullable=False)
     event_start = Column(DateTime, default=datetime.utcnow)
     event_end = Column(DateTime, default=datetime.utcnow)
